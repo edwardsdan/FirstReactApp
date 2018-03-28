@@ -8,17 +8,17 @@ class App extends Component {
   // tells React.js to re-render all or part of the DOM
   state = {
     people: [
-      {name: 'Max', age: 28},
-      {name: 'Manu', age: 29},
-      {name: 'Stephanie', age: 26}
+      {id: 'asdf',name: 'Max', age: 28},
+      {id: 'qwer',name: 'Manu', age: 29},
+      {id: 'zxcv',name: 'Stephanie', age: 26}
     ],
     showPeople: false
   };
 
   deletePersonHandler = (personIndex) => {
-    const persons = [...this.state.people];
-    people.splice(personIndex, 1);
-    this.setstate({people: people});
+    const temp = [...this.state.people];
+    temp.splice(personIndex, 1);
+    this.setState({people: temp});
   }
 
   nameChangedHandler = (event) => {
@@ -53,11 +53,13 @@ class App extends Component {
       people = (
         <div>
           {this.state.people.map((person, index) => {
-            return 
-              <Person
+            return (
+              <Person 
                 click={() => this.deletePersonHandler(index)}
                 name={person.name}
-                age={person.age} />
+                age={person.age}
+                key={person.id} />
+            )
           })}
         </div>
       );
