@@ -15,15 +15,10 @@ class App extends Component {
     showPeople: false
   };
 
-  switchNameHandler = (newName) => {
-    // DON'T DO THIS: this.state.people[0].name = 'Maximilian';
-    // Edits state to contain variable(s) from parameters
-    this.setState({people: [
-        {name: newName, age: 28},
-        {name: 'Manu', age: 29},
-        {name: 'Stephanie', age: 27}
-      ]
-    });
+  deletePersonHandler = (personIndex) => {
+    const people = this.state.people;
+    people.splice(personIndex, 1);
+    this.setstate({people: people})
   }
 
   nameChangedHandler = (event) => {
@@ -57,19 +52,13 @@ class App extends Component {
     if (this.state.showPeople) {
       people = (
         <div>
-          <Person
-            name={this.state.people[0].name}
-            age={this.state.people[0].age} />
-          <Person
-            name={this.state.people[1].name}
-            age={this.state.people[1].age}
-            click={this.switchNameHandler.bind(this, 'Max!')}
-            changed={this.nameChangedHandler}>
-            My Hobbies: Racing
-          </Person>
-          <Person
-            name={this.state.people[2].name}
-            age={this.state.people[2].age} />
+          {this.state.people.map((person, index) => {
+            return 
+              <Person
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age} />
+          })}
         </div>
       );
     }
