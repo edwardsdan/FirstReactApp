@@ -8,9 +8,9 @@ class App extends Component {
   // tells React.js to re-render all or part of the DOM
   state = {
     people: [
-      {id: 'asdf',name: 'Max', age: 28},
-      {id: 'qwer',name: 'Manu', age: 29},
-      {id: 'zxcv',name: 'Stephanie', age: 26}
+      {id: 'asdf1', name: 'Max', age: 28},
+      {id: 'qwer12', name: 'Manu', age: 29},
+      {id: 'zxcv354', name: 'Stephanie', age: 26}
     ],
     showPeople: false
   };
@@ -23,17 +23,24 @@ class App extends Component {
 
   nameChangedHandler = (event, id) => {
     // Edits state to contain some object returned from event
-    const personIndex = this.state.people.findIndex(p => {
-      return p.id === id;
+    const personIndex = this.state.people.findIndex(x => {
+      return x.id === id;
     });
 
-    const person = this.state.people[personIndex];
+    const person = {
+      ...this.state.people[personIndex]
+    };
 
-    this.setState({people: [
-      {name: 'Max', age: 28},
-      {name: event.target.value, age: 29},
-      {name: 'Stephanie', age: 26}
-    ]});
+    // alternative to above
+    // no different, just more verbose
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+
+    person.name = event.target.value;
+
+    const temp = [...this.state.people];
+    temp[personIndex] = person;
+
+    this.setState({people: temp});
   }
 
   togglePersonsHandler = () => {
