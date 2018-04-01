@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Radium from 'radium';
 
 class App extends Component {
 
@@ -31,7 +32,7 @@ class App extends Component {
       ...this.state.people[personIndex]
     };
 
-    // alternative to above
+    // alternative to above const
     // no different, just more verbose
     // const person = Object.assign({}, this.state.persons[personIndex]);
 
@@ -51,7 +52,8 @@ class App extends Component {
   render() {
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -76,12 +78,24 @@ class App extends Component {
           })}
         </div>
       );
+
+      style.backgroundColor = 'red';
+    }
+
+    let classes = [];
+
+    if (this.state.people.length <= 2) {
+      classes.push('red'); // classes = ['red']
+    }
+
+    if (this.state.people.length <=1) {
+      classes.push('bold'); // classes = ['red', 'bold']
     }
 
     return (
       <div className="App">
         <h1>Hi! I'm a react app!</h1>
-        <p>This is really working!</p>
+        <p className={classes.join(' ')}>This is really working!</p>
         <button
           style={style}
           onClick={this.togglePersonsHandler}>Toggle People
@@ -93,4 +107,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
