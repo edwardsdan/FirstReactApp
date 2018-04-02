@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
-import Radium, { StyleRoot } from 'radium';
+// import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
 
@@ -51,16 +51,8 @@ class App extends Component {
 
   render() {
 
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-    }
-
     let people = null
+    let btnClass = null;
     
     // if true, render contents
     if (this.state.showPeople) {
@@ -79,26 +71,25 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = 'red';
+      btnClass = classes.Red;
     }
 
-    let classes = [];
+    let assignedClasses = [];
 
     if (this.state.people.length <= 2) {
-      classes.push('red'); // classes = ['red']
+      assignedClasses.push(classes.red); // classes = ['red']
     }
 
     if (this.state.people.length <=1) {
-      classes.push('bold'); // classes = ['red', 'bold']
+      assignedClasses.push(classes.bold); // classes = ['red', 'bold']
     }
 
     return (
-      // wrap whole return in StyleRoot to use radium properly
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi! I'm a react app!</h1>
-          <p className={classes.join(' ')}>This is really working!</p>
+          <p className={assignedClasses.join(' ')}>This is really working!</p>
           <button
-            style={style}
+            className = {btnClass}
             onClick={this.togglePersonsHandler}>Toggle People
           </button>
           {people}
