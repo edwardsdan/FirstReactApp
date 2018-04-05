@@ -5,6 +5,10 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
+  constructor(props) {
+    //super(props);
+  }
+
   // Declare state (class-wide variable) that, when updated,
   // tells React.js to re-render all or part of the DOM
   state = {
@@ -57,15 +61,16 @@ class App extends Component {
     if (this.state.showPeople) {
       people = (
           <Persons
-          persons={this.state.people} 
-          clicked={this.deletePersonHandler}
-          changed={this.nameChangedHandler}/>
+            persons={this.state.people} 
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}/>
       );
     }
 
     return (
         <div className={classes.App}>
-          <Cockpit 
+          <Cockpit
+            appTitle={this.props.title}
             showPeople={this.state.showPeople}
             people={this.state.people}
             clicked={this.togglePersonsHandler}/>
