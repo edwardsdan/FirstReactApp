@@ -6,19 +6,34 @@ import Cockpit from '../components/Cockpit/Cockpit';
 class App extends Component {
 
   constructor(props) {
-    //super(props);
-  }
-
-  // Declare state (class-wide variable) that, when updated,
-  // tells React.js to re-render all or part of the DOM
-  state = {
-    people: [
+    super(props);
+    console.log('[App.js] Inside Constructor', {props});
+    this.state = {people: [
       {id: 'asdf1', name: 'Max', age: 28},
       {id: 'qwer12', name: 'Manu', age: 29},
       {id: 'zxcv354', name: 'Stephanie', age: 26}
     ],
-    showPeople: false
-  };
+    showPeople: false};
+  }
+
+  componentWillMount() {
+    console.log('[App.js] inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] inside componentDidMount()');
+  }
+
+  // Declare state (class-wide variable) that, when updated,
+  // tells React.js to re-render all or part of the DOM
+  // state = {
+  //   people: [
+  //     {id: 'asdf1', name: 'Max', age: 28},
+  //     {id: 'qwer12', name: 'Manu', age: 29},
+  //     {id: 'zxcv354', name: 'Stephanie', age: 26}
+  //   ],
+  //   showPeople: false
+  // };
 
   deletePersonHandler = (personIndex) => {
     const temp = [...this.state.people];
@@ -54,7 +69,7 @@ class App extends Component {
   }
 
   render() {
-
+    console.log('[App.js] inside render()');
     let people = null
     
     // if true, render contents
